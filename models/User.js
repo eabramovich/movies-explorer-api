@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import isEmail from "validator/lib/isEmail.js";
+import { NotAuthenticateError } from "../errors/not-authenticate-err";
 
 const userSchema = new mongoose.Schema(
   {
@@ -38,4 +40,22 @@ const userSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-export default mongoose.model('user', userSchema);
+userSchema.statics.findUserByCredentials = function (email, password) {
+  return this.findOne({ email })
+    .select("+password")
+    .then((user) => {
+      if (!user) {
+        throw new NotAuthenticateError("Неправильные почта или пароль");
+      }
+
+      return bcrypt.compare(password, user.password).then((matched) => {
+        if (!matched) {
+          throw new NotAuthenticateError("Неправильные почта или пароль");
+        }
+
+        return user;
+      });
+    });
+};
+
+export default mongoose.model("user", userSchema);
