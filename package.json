@@ -2,7 +2,7 @@
   "name": "movies-explorer-api",
   "version": "1.0.0",
   "description": "Дипломный проект Movies бэкенд",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --trace-warnings --inspect -- app.js",
