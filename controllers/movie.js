@@ -1,6 +1,6 @@
 import Movie from "../models/Movie";
-import { NotFoundError } from "../errors/not-found-err";
-import { ForbiddenError } from "../errors/forbidden-err";
+import { NotFoundError } from "../errors/not-found-err.js";
+import { ForbiddenError } from "../errors/forbidden-err.js";
 
 export const createMovie = (req, res, next) => {
   req.body.owner = req.user._id;

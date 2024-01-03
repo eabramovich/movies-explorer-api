@@ -1,11 +1,11 @@
 import { Router } from "express";
-import userRouter from "./user";
-import movieRouter from "./movie";
-import auth from "../middlewares/auth";
-import { createUser, login } from "../controllers/user";
-import { NotFoundError } from "../errors/not-found-err";
-import userSignUpValidate from "../middlewares/userSignUpValidate";
-import userSignInValidate from "../middlewares/userSignInValidate";
+import userRouter from "./user.js";
+import movieRouter from "./movie.js";
+import auth from "../middlewares/auth.js";
+import { createUser, login } from "../controllers/user.js";
+import { NotFoundError } from "../errors/not-found-err.js";
+import userSignUpValidate from "../middlewares/userSignUpValidate.js";
+import userSignInValidate from "../middlewares/userSignInValidate.js";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getCurrentUserInfo, updateCurrentUserInfo } from "../controllers/user";
-import userUpdateValidate from "../middlewares/userUpdateValidate";
+import { getCurrentUserInfo, updateCurrentUserInfo } from "../controllers/user.js";
+import userUpdateValidate from "../middlewares/userUpdateValidate.js";
 
 const userRouter = Router();
 

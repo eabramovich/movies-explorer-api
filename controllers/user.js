@@ -1,9 +1,9 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
-import { generateToken } from "../utils/jwt";
-import { SOLD_ROUNDS } from "../utils/constants";
-import { NotFoundError } from "../errors/not-found-err";
-import { MongoDuplicateError } from "../errors/mongo-duplicate-error";
+import { generateToken } from "../utils/jwt.js";
+import { SOLD_ROUNDS } from "../utils/constants.js";
+import { NotFoundError } from "../errors/not-found-err.js";
+import { MongoDuplicateError } from "../errors/mongo-duplicate-error.js";
 
 export const createUser = (req, res, next) => {
   const { name, email, password } = req.body;

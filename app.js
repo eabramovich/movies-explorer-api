@@ -1,10 +1,10 @@
 import express, { json } from 'express';
 import mongoose from "mongoose";
-import router from './routes';
+import router from './routes/index.js';
 import helmet from 'helmet';
 import { errors } from 'celebrate';
-import { requestLogger, errorLogger } from './middlewares/logger';
-import { limiter } from './middlewares/rateLimiter';
+import { requestLogger, errorLogger } from './middlewares/logger.js';
+import { limiter } from './middlewares/rateLimiter.js';
 
 const { PORT = 3000, CONNECT_BD = 'mongodb://127.0.0.1:27017/bitfilmsdb'} = process.env;
 
