@@ -1,4 +1,4 @@
-import Movie from "../models/Movie";
+import Movie from "../models/Movie.js";
 import { NotFoundError } from "../errors/not-found-err.js";
 import { ForbiddenError } from "../errors/forbidden-err.js";
 
