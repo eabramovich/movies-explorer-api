@@ -1,5 +1,5 @@
-import { Joi, celebrate } from "celebrate";
-import { URL_PATTERN } from "../utils/constants.js";
+import { Joi, celebrate } from 'celebrate';
+import { URL_PATTERN } from '../utils/constants.js';
 
 export default celebrate({
   body: Joi.object().keys({
@@ -14,5 +14,5 @@ export default celebrate({
     thumbnail: Joi.string().pattern(new RegExp(URL_PATTERN)),
     trailerLink: Joi.string().pattern(new RegExp(URL_PATTERN)),
     image: Joi.string().pattern(new RegExp(URL_PATTERN)),
-  })
-})
+  }),
+});

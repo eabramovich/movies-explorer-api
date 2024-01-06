@@ -1,7 +1,9 @@
-export class MongoDuplicateError extends Error {
+class MongoDuplicateError extends Error {
   constructor(message) {
     super(message);
     this.statusCode = 409;
-    this.name = "MongoDuplicateError";
+    this.name = 'MongoDuplicateError';
   }
 }
+
+export default MongoDuplicateError;

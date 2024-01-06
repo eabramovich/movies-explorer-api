@@ -1,8 +1,8 @@
-import { Joi, celebrate } from "celebrate";
+import { Joi, celebrate } from 'celebrate';
 
 export default celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(8),
+    name: Joi.string().min(2).max(30),
     email: Joi.string().email(),
-  })
-})
+  }),
+});

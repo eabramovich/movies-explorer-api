@@ -1,17 +1,16 @@
-import User from "../models/User.js";
-import bcrypt from "bcrypt";
-import { generateToken } from "../utils/jwt.js";
-import { SOLD_ROUNDS } from "../utils/constants.js";
-import { NotFoundError } from "../errors/not-found-err.js";
-import { MongoDuplicateError } from "../errors/mongo-duplicate-error.js";
+import bcrypt from 'bcrypt';
+import User from '../models/User.js';
+import generateToken from '../utils/jwt.js';
+import { SOLD_ROUNDS } from '../utils/constants.js';
+import MongoDuplicateError from '../errors/mongo-duplicate-error.js';
 
 export const createUser = (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { email } = req.body;
   return User.find({ email })
     .then((user) => {
       if (user.length > 0) {
         throw new MongoDuplicateError(
-          "Пользователь с таким email уже зарегистрирован"
+          'Пользователь с таким email уже зарегистрирован',
         );
       }
 
@@ -21,11 +20,9 @@ export const createUser = (req, res, next) => {
           req.body.password = hash;
           return User.create(req.body);
         })
-        .then((user) =>
-          res.send({
-            data: { _id: user._id, name: user.name, email: user.email },
-          })
-        )
+        .then((result) => res.send({
+          data: { _id: result._id, name: result.name, email: result.email },
+        }))
         .catch(next);
     })
     .catch(next);
@@ -44,7 +41,8 @@ export const login = (req, res, next) => {
 };
 
 export const getCurrentUserInfo = (req, res, next) => {
-  return User.findOne({ _id: req.user._id })
+  const id = req.user._id;
+  return User.findOne({ _id: id })
     .then((user) => {
       res.send({ data: user });
     })
@@ -52,12 +50,21 @@ export const getCurrentUserInfo = (req, res, next) => {
 };
 
 export const updateCurrentUserInfo = (req, res, next) => {
-  return User.findByIdAndUpdate(req.user._id, req.body, {
-    new: true,
-    runValidators: true,
-  })
+  const userId = req.user._id;
+  const { email } = req.body;
+  return User.find({ email })
     .then((user) => {
-      res.send({ data: user });
+      if (user.length > 0) {
+        throw new MongoDuplicateError('Пользователь с таким email уже зарегистрирован');
+      }
+      return User.findByIdAndUpdate(userId, req.body, {
+        new: true,
+        runValidators: true,
+      })
+        .then((result) => {
+          res.send({ data: result });
+        })
+        .catch(next);
     })
     .catch(next);
 };

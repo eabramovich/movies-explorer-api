@@ -1,4 +1,4 @@
-import { Joi, celebrate } from "celebrate";
+import { Joi, celebrate } from 'celebrate';
 
 export default celebrate({
   body: Joi.object().keys({
@@ -6,4 +6,4 @@ export default celebrate({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(5),
   }),
-})
+});
