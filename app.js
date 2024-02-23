@@ -3,6 +3,7 @@ import 'dotenv/config.js';
 import mongoose from 'mongoose';
 import { errors } from 'celebrate';
 import helmet from 'helmet';
+import cors from 'cors';
 import router from './routes/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 
@@ -17,6 +18,7 @@ mongoose.connect(CONNECT_BD);
 app.use(limiter);
 app.use(json());
 app.use(helmet());
+app.use(cors());
 app.use(requestLogger);
 app.use(router);
 app.use(errorLogger);
